@@ -1,10 +1,18 @@
+<!-- <p>insertproduct works!</p>
+
+<button class="btn btn-success">
+    Add to Cart <i class="fa-solid fa-cart-shopping"></i>
+  </button>
+  //(click)="addproduct()"  -->
+
+
 
   <h2>Add Product</h2>
 <div class="container">
     <div class="card border-primary mb-4">
-      <div class="card-header  bg-primary text-white">Product Form </div>
+      <div class="card-header  bg-primary text-white"> {{ updateDone ? "Update Product" : "Add Product" }} </div>
       <div class="card-body">
-        <form  #AddproForm="ngForm" (ngSubmit)="addproduct()">
+        <form  #AddproForm="ngForm"  (ngSubmit)="updateDone ? updateProduct() : addproduct()">
           <div class="form-group row mb-2">
             <label class="col-md-2 col-form-label" for="emailId">Name of Product</label>
             <div class="col-md-8">
@@ -66,21 +74,24 @@
               [(ngModel)]="product2.category"
               #ProductCategory="ngModel"
               >
-                <option value="electronics" selected> Electronics</option>
-                <option value="women's clothing">Woman clothes </option>
-                <option value="men's clothing"> men clothes</option>
-                <option value="jewelery"> jewelery </option>
+                <option value="" selected> All product...</option>
+                <option value="Smart Phone"> Smart Phone </option>
+                <option value="Laptop"> Laptop</option>
+                <option value="Skin Care"> Skin Care </option>
               </select>
             </div>
           </div>
   
           <!-- <button type="submit" class="btn btn-primary" (click)="addproduct()" >Add product</button> -->
-          <button type="submit" class="btn btn-primary" (click)="insertprod()" >Add product</button>
+          <button type="submit" class="btn btn-primary" (click)="insertprod()" > {{ updateDone ? "Update Product" : "Add Product" }}</button>
 
         </form>
       </div>
     </div>
-   
+     <!-- <p>ProductName valid :{{ProductName.valid}} </p> 
+     <p>ProductName dirty :{{ProductName.dirty}} </p>
+     <p>ProductName  touched :{{ProductName.touched}} </p> 
+    <p>ProductName  errors :{{ProductName.errors | json}} </p> -->
 
     <p>AddproForm valid :{{AddproForm.valid}} </p> 
 
@@ -107,7 +118,8 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.price }}</td>
             <td>{{ item.category }}</td>
-            <td><button class="btn btn-primary" >Edit Product</button></td>
+            <!-- <td><button class="btn btn-primary" >Edit Product</button></td> -->
+            <button (click)="updateProductBtn(item.id)" class="btn btn-primary"> Update</button>
             <td><button class="btn btn-danger" (click)="deleteprod(item.id)">Delete Product</button></td>
         </tr>
     }

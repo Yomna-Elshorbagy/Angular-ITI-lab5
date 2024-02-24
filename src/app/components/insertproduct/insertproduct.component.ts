@@ -17,18 +17,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './insertproduct.component.css'
 })
 export class InsertproductComponent implements OnInit{
+  // constructor(private http: HttpClient) { }
 
+  // getAllProductbyMyIP(): Observable<any[]> {
+  //   return this.http.get<any[]>(`http://localhost:3000/products`);
+  // }
   product2:Insertproduct={
     // name: "aaa",
     // price: 25,
     // category: "sss",
-    // id: "1"
-  }as Insertproduct
+    // id: 1
+  } as Insertproduct
 
   insertproduct!:Insertproduct[];
-
+  updateDone: boolean = false;
   constructor( private router:Router, private iprod:InsertproductsService, private route:ActivatedRoute){
-    
     this.insertproduct=[
     {
       'id': '10',
@@ -55,7 +58,7 @@ export class InsertproductComponent implements OnInit{
  
     ]
   }
-
+ 
 
     addproduct(){
       this.iprod.createnewproduct(this.product2).subscribe({
@@ -92,11 +95,27 @@ export class InsertproductComponent implements OnInit{
         }
     })
 
-    // this.iprod.getCategories().subscribe((data) => {
-    //   this.product2 = data;
-    //   console.log(this.product2);
-    // });
+   
+    }
+    updateProductBtn(id: string) {
+      let updatedProduct = this.insertproduct.filter((itemId) => itemId.id === id);
+      this.updateDone = true;
+      this.product2.id = updatedProduct[0].id;
+      this.product2.name = updatedProduct[0].name;
+      this.product2.price = updatedProduct[0].price;
+      this.product2.category = updatedProduct[0].category;
+      console.log(updatedProduct);
+    }
+    
+    updateProduct() {
+      console.log(this.product2);
+    
+      this.iprod.updateProduct(this.product2)?.subscribe({
+        next: () => {
+          this.updateDone = false;
+        },
+      });
 
-  }
-      
+    } 
+ 
 }

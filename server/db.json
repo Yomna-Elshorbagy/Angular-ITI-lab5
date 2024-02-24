@@ -28,24 +28,7 @@
       "image": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg"
     }
   ],
-  "category": [
-    {
-      "id": "231",
-      "name": "electronics"
-    },
-    {
-      "id": "232",
-      "name": "women's clothing"
-    },
-    {
-      "id": "233",
-      "name": "men's clothing"
-    },
-    {
-      "id": "234",
-      "name": "jewelery"
-    }
-  ],
+
   "insertproduct": [
     {
       "id": "13",
